@@ -1,48 +1,134 @@
-/* style.css - CÓDIGO FINAL Y COMPLETO */
+/* style.css - CÓDIGO FINAL CON ESTILOS FESTIVOS Y PREVIEW CORREGIDO */
 
+/* Estilos de Tipografía y Colores Generales */
 body {
-    /* Aplicar Quicksand a todo el texto normal */
     font-family: 'Quicksand', sans-serif;
-    background-color: #FFF9C4; /* Fondo rosa pastel */
-    color: #333333; /* Texto morado oscuro */
+    background-color: #FFF9C4; /* Fondo: Amarillo Pastel Suave */
+    color: #333333; /* Texto Base: Gris Oscuro */
     text-align: center;
-    padding: 50px;
-    /* Centrar el contenido en la página */
+    padding: 0;
+    margin: 0;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    margin: 0;
+    overflow: hidden; /* Importante para el botón esquivo */
+}
+
+/* ------------------------------------------------------------------ */
+/* ESTILOS DE LA PANTALLA DE PREVIEW (#previewScreen) */
+/* ------------------------------------------------------------------ */
+
+#previewScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #e3f2fd; /* Fondo azul claro para el modal */
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.preview-box {
+    background-color: #ffffff;
+    border: 5px solid #00BCD4; /* Borde: Azul Cian Brillante */
+    border-radius: 15px;
+    padding: 40px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    width: 90%;
+}
+
+.preview-box h2 {
+    font-family: 'Pacifico', cursive; 
+    color: #E91E63; /* Magenta Brillante */
+    font-size: 2.5em;
+    margin-bottom: 15px;
+}
+
+.button-group {
+    margin-top: 30px;
+    position: relative; 
+    
+    /* CORRECCIÓN: Centramos los botones y usamos un GAP amplio */
+    display: flex;
+    justify-content: center; 
+    gap: 100px; /* <--- MÁS ESPACIO */
+    min-height: 50px; 
+}
+
+.cta-button {
+    background-color: #ffc107;
+    color: #333;
+    border: none;
+    padding: 15px 25px;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    z-index: 100;
+    min-width: 150px; /* Fija el tamaño del botón SÍ */
+}
+
+#noButton {
+    /* Posición absoluta para sacarlo del flujo */
+    position: absolute; 
+    right: 50px; 
+    top: 0;
+    
+    /* Mantiene el tamaño para que no afecte al botón SÍ */
+    min-width: 150px; 
+    transition: transform 0.1s ease; 
+}
+
+/* ------------------------------------------------------------------ */
+/* CLASES DE UTILIDAD */
+/* ------------------------------------------------------------------ */
+.hidden {
+    display: none !important;
+}
+
+/* ------------------------------------------------------------------ */
+/* ESTILOS DEL CONTENIDO PRINCIPAL (#mainContent) */
+/* ------------------------------------------------------------------ */
+
+#mainContent {
+    padding: 50px;
+    max-width: 800px; 
+    width: 90%;
+    margin: auto;
 }
 
 .contenedor-cumpleanos {
     background-color: #ffffff;
-    border: 5px solid #00BCD4; /* Borde naranja festivo */
+    border: 5px solid #00BCD4; 
     border-radius: 15px;
     padding: 30px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    max-width: 600px;
-    width: 90%;
 }
 
 h1 {
-    /* Aplicar Pacifico a los títulos (cursiva y festiva) */
     font-family: 'Pacifico', cursive; 
-    color: #E91E63; /* Título rojo rubí */
+    color: #E91E63; 
     font-size: 3em;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 p {
-    /* Mantenemos Quicksand para el texto del párrafo */
     font-family: 'Quicksand', sans-serif;
-    font-size: 1.2em;
+    font-size: 1.15em;
+    line-height: 1.6; 
     margin-bottom: 25px;
+    text-align: left;
 }
 
 #botonAudio {
-    background-color: #8BC34A; /* Botón amarillo brillante */
+    background-color: #8BC34A; /* Verde Lima Brillante */
     color: #ffffff;
     border: none;
     padding: 15px 30px;
@@ -54,7 +140,7 @@ p {
 }
 
 #botonAudio:hover {
-    background-color: #9CCC65;
+    background-color: #9CCC65; 
 }
 
 #botonAudio:active {
