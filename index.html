@@ -15,29 +15,45 @@
 </head>
 <body>
 
-    <div class="contenedor-cumpleanos">
-        <h1>¡!</h1>
-        <p>
-            ¡Feliz Cumpleaños mi niña! Hoy es tu día, y el mundo entero debería detenerse para celebrar la existencia 
-    de una persona tan maravillosa y especial como tú. Desde el primer día, has llenado mi vida de luz, 
-    de esa alegría incondicional y de un amor que atesoro por encima de todas las cosas.
-    <br><br>
-    Que este nuevo año de vida que comienzas venga cargado de toda la felicidad que mereces, de nuevas aventuras, 
-    de sueños cumplidos y de esa paz que solo tú sabes encontrar. Eres mi mayor tesoro, y te deseo un día 
-    lleno de sonrisas, pastel, y por supuesto, muchos regalos.
-    <br><br>
-    Gracias por cada recuerdo, cada enseñanza y cada momento compartido. Nunca dejes de brillar. 
-    ¡Te quiero inmensamente y te deseo lo mejor de este universo!.
-        </p>
-        
-        <button id="botonAudio">
-            🎶 Haz Clic 🎶
-        </button>
-
-        <audio id="audioFondo">
-            <source src="assets/audio/audio.mp3" type="audio/mpeg">
-            Tu navegador no soporta el elemento de audio.
-        </audio>
+    <div id="previewScreen">
+        <div class="preview-box">
+            <h2>¡Espera un momento!</h2>
+            <p>¿Estás listo(a) para ver el mensaje y la sorpresa de cumpleaños?</p>
+            
+            <div class="button-group">
+                <button id="yesButton" class="cta-button">🎉 ¡SÍ, ADELANTE! 🎉</button>
+                
+                <button id="noButton" class="cta-button">❌ No, mejor no.</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="mainContent" class="hidden">
+        <div class="contenedor-cumpleanos">
+            <h1>¡Hola! ¡Bienvenido(a)!</h1>
+            
+            <p>
+                ¡Feliz Cumpleaños mi niña! Hoy es tu día, y el mundo entero debería detenerse para celebrar la existencia 
+                de una persona tan maravillosa y especial como tú. Desde el primer día, has llenado mi vida de luz, 
+                de esa alegría incondicional y de un amor que atesoro por encima de todas las cosas.
+                <br><br>
+                Que este nuevo año de vida que comienzas venga cargado de toda la felicidad que mereces, de nuevas aventuras, 
+                de sueños cumplidos y de esa paz que solo tú sabes encontrar. Eres mi mayor tesoro, y te deseo un día 
+                lleno de sonrisas, pastel, y por supuesto, muchos regalos.
+                <br><br>
+                Gracias por cada recuerdo, cada enseñanza y cada momento compartido. Nunca dejes de brillar. 
+                ¡Te quiero inmensamente y te deseo lo mejor de este universo!
+            </p>
+            
+            <button id="botonAudio">
+                Presiona Aquí para la Música 🎉
+            </button>
+    
+            <audio id="audioFondo">
+                <source src="assets/audio/audio.mp3" type="audio/mpeg">
+                Tu navegador no soporta el elemento de audio.
+            </audio>
+        </div>
     </div>
 
     <script src="main.js"></script>
