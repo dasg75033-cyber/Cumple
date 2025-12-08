@@ -1,4 +1,4 @@
-// main.js - CÓDIGO FINAL CON BOTÓN ESQUIVO QUE NO REGRESA
+// main.js - CÓDIGO FINAL CON BOTÓN ESQUIVO QUE RESPONDE AL CLICK (Móviles y PC)
 
 function dispararConfeti(spread, ticks) {
     // Función de confeti
@@ -47,9 +47,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 1. LÓGICA DEL BOTÓN "SÍ" (Muestra la página) ---
     yesButton.addEventListener('click', iniciarPagina);
     
-    // --- 2. LÓGICA DEL BOTÓN "NO" (Botón Esquivo) ---
+    // --- 2. LÓGICA DEL BOTÓN "NO" (Botón Esquivo - Ahora responde al click/toque) ---
     
-    noButton.addEventListener('mouseenter', () => {
+    // CAMBIO CLAVE AQUÍ: Usamos 'click' en lugar de 'mouseenter'
+    noButton.addEventListener('click', (event) => {
+        // Detener el comportamiento predeterminado del botón (evitar submits, aunque no aplica aquí)
+        event.preventDefault(); 
+
         // Coordenadas del movimiento, limitadas a un área de 300x300px
         const maxMovement = 300; 
         
@@ -62,8 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Cambiar el texto para agregar drama (¡se queda en esta posición y texto!)
         noButton.textContent = '¡No me atraparás!';
     });
-    
-    // ELIMINAMOS EL EVENTO 'mouseleave' para que el botón se quede donde está.
     
     // --- 3. LÓGICA ORIGINAL DEL AUDIO ---
     const audio = document.getElementById('audioFondo');
