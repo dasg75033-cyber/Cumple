@@ -1,23 +1,23 @@
-// main.js - CÓDIGO FINAL CON SALUDO DINÁMICO Y CONFETI
+// main.js - CÓDIGO FINAL CON BOTÓN ESQUIVO QUE NO REGRESA
 
-// Función para disparar el confeti
 function dispararConfeti(spread, ticks) {
+    // Función de confeti
     confetti({
-        // El confeti sale del centro superior de la pantalla
         origin: { y: 0.6 }, 
         spread: spread,
-        ticks: ticks, // Duración de la animación
+        ticks: ticks,
         zIndex: 9999,
-        // Usamos colores de tu paleta final
         shapes: ['circle', 'square', 'star', 'heart'], 
         colors: ['#e91e63', '#8bc34a', '#00bcd4', '#ffeb3b'] 
     });
 }
 
+function iniciarPagina() {
+    // 1. Oculta la pantalla de preview y muestra el contenido principal
+    document.getElementById('previewScreen').classList.add('hidden');
+    document.getElementById('mainContent').classList.remove('hidden');
 
-document.addEventListener('DOMContentLoaded', () => {
-    
-    // --- LÓGICA DE SALUDO DINÁMICO ---
+    // 2. Lógica del Saludo Dinámico
     const hora = new Date().getHours();
     let saludo;
 
@@ -29,34 +29,58 @@ document.addEventListener('DOMContentLoaded', () => {
         saludo = "✨ ¡Feliz Noche de Celebración! 🎉";
     }
 
-    const tituloH1 = document.querySelector('h1');
+    const tituloH1 = document.querySelector('#mainContent h1');
     if (tituloH1) {
         tituloH1.textContent = saludo;
     }
     
-    // --- CONFETI AL CARGAR LA PÁGINA ---
-    // Dispara un confeti inicial grande y corto
+    // 3. Dispara un confeti inicial al mostrar la página
     dispararConfeti(180, 100); 
+}
 
 
-    // --- LÓGICA DE AUDIO Y BOTÓN ---
-    const audio = document.getElementById('audioFondo');
-    const boton = document.getElementById('botonAudio');
+document.addEventListener('DOMContentLoaded', () => {
     
-    boton.addEventListener('click', () => {
-        // 1. Iniciar la música
-        audio.play()
-            .then(() => {
-                boton.style.display = 'none';
-                
-                // 2. Disparar confeti de fiesta al hacer clic (más duradero)
-                setTimeout(() => {
-                    dispararConfeti(60, 300); 
-                }, 0);
-            })
-            .catch(error => {
-                // Mensaje en caso de error de audio
-                console.error("Error al iniciar la música:", error);
-            });
+    const yesButton = document.getElementById('yesButton');
+    const noButton = document.getElementById('noButton');
+    
+    // --- 1. LÓGICA DEL BOTÓN "SÍ" (Muestra la página) ---
+    yesButton.addEventListener('click', iniciarPagina);
+    
+    // --- 2. LÓGICA DEL BOTÓN "NO" (Botón Esquivo) ---
+    
+    noButton.addEventListener('mouseenter', () => {
+        // Coordenadas del movimiento, limitadas a un área de 300x300px
+        const maxMovement = 300; 
+        
+        const newX = Math.random() * maxMovement - (maxMovement / 2);
+        const newY = Math.random() * maxMovement - (maxMovement / 2);
+
+        // Aplica la transformación para mover el botón
+        noButton.style.transform = `translate(${newX}px, ${newY}px)`;
+        
+        // Cambiar el texto para agregar drama (¡se queda en esta posición y texto!)
+        noButton.textContent = '¡No me atraparás!';
     });
+    
+    // ELIMINAMOS EL EVENTO 'mouseleave' para que el botón se quede donde está.
+    
+    // --- 3. LÓGICA ORIGINAL DEL AUDIO ---
+    const audio = document.getElementById('audioFondo');
+    const botonAudio = document.getElementById('botonAudio');
+    
+    if(botonAudio) {
+        botonAudio.addEventListener('click', () => {
+            audio.play()
+                .then(() => {
+                    botonAudio.style.display = 'none';
+                    setTimeout(() => {
+                        dispararConfeti(60, 300); 
+                    }, 0);
+                })
+                .catch(error => {
+                    console.error("Error al iniciar la música:", error);
+                });
+        });
+    }
 });
