@@ -1,4 +1,4 @@
-/* style.css - CÓDIGO FINAL CON ESTILOS FESTIVOS Y PREVIEW CORREGIDO */
+/* style.css - CÓDIGO FINAL CON ESPACIO, TAMAÑO Y CENTRADO CORREGIDOS */
 
 /* Estilos de Tipografía y Colores Generales */
 body {
@@ -12,7 +12,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    overflow: hidden; /* Importante para el botón esquivo */
+    overflow: hidden; 
 }
 
 /* ------------------------------------------------------------------ */
@@ -25,7 +25,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #e3f2fd; /* Fondo azul claro para el modal */
+    background-color: #e3f2fd; 
     z-index: 1000;
     display: flex;
     justify-content: center;
@@ -35,7 +35,7 @@ body {
 
 .preview-box {
     background-color: #ffffff;
-    border: 5px solid #00BCD4; /* Borde: Azul Cian Brillante */
+    border: 5px solid #00BCD4; 
     border-radius: 15px;
     padding: 40px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
@@ -45,7 +45,7 @@ body {
 
 .preview-box h2 {
     font-family: 'Pacifico', cursive; 
-    color: #E91E63; /* Magenta Brillante */
+    color: #E91E63; 
     font-size: 2.5em;
     margin-bottom: 15px;
 }
@@ -53,11 +53,9 @@ body {
 .button-group {
     margin-top: 30px;
     position: relative; 
-    
-    /* CORRECCIÓN: Centramos los botones y usamos un GAP amplio */
     display: flex;
     justify-content: center; 
-    gap: 100px; /* <--- MÁS ESPACIO */
+    width: 100%; 
     min-height: 50px; 
 }
 
@@ -65,25 +63,37 @@ body {
     background-color: #ffc107;
     color: #333;
     border: none;
-    padding: 15px 25px;
+    /* AJUSTE FINAL: Aumentamos padding horizontal a 30px */
+    padding: 15px 30px; /* <--- MÁS ESPACIO LATERAL */
     font-size: 1em;
     font-weight: bold;
     border-radius: 50px;
     cursor: pointer;
     transition: background-color 0.3s ease;
     z-index: 100;
-    min-width: 150px; /* Fija el tamaño del botón SÍ */
+    
+    /* Mantenemos ancho fijo y centrado */
+    width: 180px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+}
+
+/* Posición Absoluta para forzar el espaciado entre ellos */
+#yesButton {
+    position: absolute; 
+    left: 20%; 
+    transform: translateX(-50%); 
 }
 
 #noButton {
-    /* Posición absoluta para sacarlo del flujo */
     position: absolute; 
-    right: 50px; 
+    right: 20%; 
     top: 0;
     
-    /* Mantiene el tamaño para que no afecte al botón SÍ */
-    min-width: 150px; 
+    min-width: 180px; 
     transition: transform 0.1s ease; 
+    transform: translateX(50%); 
 }
 
 /* ------------------------------------------------------------------ */
