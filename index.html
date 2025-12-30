@@ -15,15 +15,36 @@
 </head>
 <body>
 
-    <div id="previewScreen">
+    <div id="loadingScreen">
+        <div class="loading-box">
+            <h2 id="loadingTitle">¡Página disponible en:</h2>
+            
+            <div id="countdownTimer" class="timer-group">
+                <div>
+                    <span id="hours" class="counter-unit">00</span>
+                    <p class="counter-label">HORAS</p>
+                </div>
+                <div>
+                    <span id="minutes" class="counter-unit">00</span>
+                    <p class="counter-label">MINUTOS</p>
+                </div>
+                <div>
+                    <span id="seconds" class="counter-unit">00</span>
+                    <p class="counter-label">SEGUNDOS</p>
+                </div>
+            </div>
+            <p id="countdownMessage" style="color: #E91E63; font-weight: bold;"></p>
+        </div>
+    </div>
+
+    <div id="previewScreen" class="hidden">
         <div class="preview-box">
             <h2>¡Espera un momento!</h2>
-            <p>¿Estás lista para ver el mensaje y la sorpresa de cumpleaños?</p>
+            <p>¿Estás listo(a) para ver el mensaje y la sorpresa de cumpleaños?</p>
             
             <div class="button-group">
-                <button id="yesButton" class="cta-button">¡SÍ,ADELANTE!</button>
-                
-                <button id="noButton" class="cta-button">No, mejor no.</button>
+                <button id="yesButton" class="cta-button">🎉 ¡SÍ, ADELANTE! 🎉</button>
+                <button id="noButton" class="cta-button">❌ No, mejor no.</button>
             </div>
         </div>
     </div>
@@ -45,8 +66,8 @@
                 ¡Te quiero inmensamente y te deseo lo mejor de este universo!
             </p>
             
-            <button id="botonAudio">
-                Presiona Aquí🎉
+            <button id="playPauseButton">
+                ▶️ Presiona Aquí para la Música
             </button>
     
             <audio id="audioFondo">
