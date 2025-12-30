@@ -1,4 +1,4 @@
-// main.js - CÓDIGO FINAL CON CONTADOR DE 3 SEGUNDOS PERMANENTE POST-MEDIANOCHE
+// main.js - CÓDIGO FINAL Y SIMPLIFICADO CON CUENTA REGRESIVA FIJA DE 5 SEGUNDOS
 
 // --- LÓGICA DEL CONFETI Y FUNCIONES DE INICIO ---
 
@@ -48,102 +48,36 @@ function esquivarBoton(event) {
     const newX = Math.random() * maxMovement - (maxMovement / 2);
     const newY = Math.random() * maxMovement - (maxMovement / 2);
 
-    noButton.style.transform = `translate(${newX}px, ${newY}px)`;
-    noButton.textContent = '¡No me atraparás!';
+    if(noButton) {
+        noButton.style.transform = `translate(${newX}px, ${newY}px)`;
+        noButton.textContent = '¡No me atraparás!';
+    }
 }
 
 
-// --- CONTADOR FINAL DE 3 SEGUNDOS ---
-function iniciarCuentaRegresivaFinal() {
+// --- LÓGICA DE LA CUENTA REGRESIVA DE 5 SEGUNDOS (Función principal) ---
+function iniciarCuentaRegresiva() {
     const loadingScreen = document.getElementById('loadingScreen');
-    const loadingTitle = document.getElementById('loadingTitle');
-    const countdownTimer = document.getElementById('countdownTimer');
-    const countdownMessage = document.getElementById('countdownMessage');
-    
-    // Si no encontramos la pantalla de carga, salimos
-    if (!loadingScreen) {
-        // Si la pantalla de carga ya desapareció, pasamos directo a los botones
-        document.getElementById('previewScreen').classList.remove('hidden');
-        return;
-    }
-
-    // Preparamos la pantalla de carga para el contador simple
-    loadingTitle.textContent = '¡PREPÁRATE!';
-    // Reemplazamos el contador de Horas/Minutos/Segundos con el simple:
-    countdownTimer.innerHTML = `<span id="finalCountdown" class="counter-unit" style="font-size: 6em;">3</span>`;
-    countdownMessage.textContent = 'La sorpresa se revelará en...';
-    
-    let contador = 3;
     const finalCountdownSpan = document.getElementById('finalCountdown');
+    
+    if (!loadingScreen || !finalCountdownSpan) return;
 
-    const intervaloFinal = setInterval(() => {
+    let contador = 5; // INICIAMOS EN 5 SEGUNDOS
+    finalCountdownSpan.textContent = contador;
+
+    const intervalo = setInterval(() => {
         contador--;
         if (contador > 0) {
             finalCountdownSpan.textContent = contador;
         } else {
-            clearInterval(intervaloFinal);
-            // Mostrar la pantalla de bienvenida con los botones
+            clearInterval(intervalo);
+            
+            // Ocultar pantalla de carga y mostrar la pantalla de bienvenida
             loadingScreen.classList.add('hidden');
-            document.getElementById('previewScreen').classList.remove('hidden');
+            const preview = document.getElementById('previewScreen');
+            if (preview) preview.classList.remove('hidden');
         }
     }, 1000); 
-}
-
-
-// --- LÓGICA DEL CONTADOR DE TIEMPO REAL (SINCRONIZADO A MEDIANOCHE) ---
-function iniciarContadorSincronizado() {
-    
-    const loadingScreen = document.getElementById('loadingScreen');
-    const hoursSpan = document.getElementById('hours');
-    const minutesSpan = document.getElementById('minutes');
-    const secondsSpan = document.getElementById('seconds');
-    const countdownMessage = document.getElementById('countdownMessage');
-
-    if (!loadingScreen) return; 
-
-    function actualizarContador() {
-        const ahora = new Date();
-        const medianoche = new Date();
-        
-        // Objetivo: Medianoche de HOY/MAÑANA (24:00)
-        medianoche.setHours(24, 0, 0, 0); 
-        
-        let diferenciaMs = medianoche.getTime() - ahora.getTime();
-        
-        // --- LÓGICA CORREGIDA PARA ACCESO PERMANENTE DESPUÉS DE 1 AM ---
-        // La página siempre debe abrirse (con el mini-reset) si:
-        // 1. El contador acaba de llegar a cero (diferenciaMs <= 0).
-        // 2. O si ya es después de la 1:00 AM (ahora.getHours() >= 1).
-        if (diferenciaMs <= 0 || ahora.getHours() >= 1) { 
-            clearInterval(intervalo);
-            iniciarCuentaRegresivaFinal(); 
-            return;
-        }
-
-        // 3. Conversión de milisegundos a tiempo (Solo si AÚN NO es medianoche)
-        const horas = Math.floor(diferenciaMs / (1000 * 60 * 60));
-        diferenciaMs -= horas * 1000 * 60 * 60;
-        
-        const minutos = Math.floor(diferenciaMs / (1000 * 60));
-        diferenciaMs -= minutos * 1000 * 60;
-        
-        const segundos = Math.floor(diferenciaMs / 1000);
-
-        // 4. Formatear y mostrar (solo si los elementos existen, para evitar errores)
-        if (hoursSpan && minutesSpan && secondsSpan) {
-            hoursSpan.textContent = horas.toString().padStart(2, '0');
-            minutesSpan.textContent = minutos.toString().padStart(2, '0');
-            secondsSpan.textContent = segundos.toString().padStart(2, '0');
-        }
-        
-        if (countdownMessage) {
-            countdownMessage.textContent = `¡Faltan solo ${horas} horas para que empiece el día!`;
-        }
-    }
-
-    // Actualizar el contador y luego cada segundo
-    actualizarContador();
-    const intervalo = setInterval(actualizarContador, 1000);
 }
 
 
@@ -152,7 +86,7 @@ function manejarAudio() {
     const audio = document.getElementById('audioFondo');
     const playPauseButton = document.getElementById('playPauseButton');
     
-    if (!audio || !playPauseButton) return; // Evitar errores si no existen
+    if (!audio || !playPauseButton) return; 
 
     if (audio.paused) {
         audio.play()
@@ -180,8 +114,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const noButton = document.getElementById('noButton');
     const playPauseButton = document.getElementById('playPauseButton');
 
-    // INICIA EL CONTADOR DE TIEMPO REAL APENAS CARGA LA PÁGINA
-    iniciarContadorSincronizado();
+    // INICIA LA CUENTA REGRESIVA DE 5 SEGUNDOS APENAS CARGA LA PÁGINA
+    iniciarCuentaRegresiva();
 
     // --- 1. LÓGICA DEL BOTÓN "SÍ" ---
     if(yesButton) yesButton.addEventListener('click', mostrarContenidoPrincipal);
