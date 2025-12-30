@@ -1,4 +1,4 @@
-/* style.css - CÓDIGO FINAL CON ESPACIO, TAMAÑO Y CENTRADO CORREGIDOS */
+/* style.css - CÓDIGO FINAL CON ESTILOS DE CONTADOR POR HORAS SINCRONIZADO */
 
 /* Estilos de Tipografía y Colores Generales */
 body {
@@ -16,7 +16,75 @@ body {
 }
 
 /* ------------------------------------------------------------------ */
-/* ESTILOS DE LA PANTALLA DE PREVIEW (#previewScreen) */
+/* ESTILOS DE LA PANTALLA DE CARGA (#loadingScreen) - PANTALLA 1 */
+/* ------------------------------------------------------------------ */
+
+#loadingScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fce4ec; /* Rosa muy pálido para el inicio */
+    z-index: 2000; /* Asegura que esté por encima de todo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.loading-box {
+    background-color: #ffffff;
+    border: 5px solid #E91E63; /* Borde magenta */
+    border-radius: 15px;
+    padding: 30px; 
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    max-width: 550px; /* Ancho para el contador triple */
+    width: 90%;
+}
+
+.loading-box h2 {
+    font-family: 'Quicksand', sans-serif; 
+    color: #4A148C; /* Morado Oscuro */
+    font-size: 1.8em;
+    margin-bottom: 20px;
+}
+
+/* GRUPO DEL CONTADOR (Horas, Minutos, Segundos) */
+.timer-group {
+    display: flex;
+    justify-content: space-around;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.timer-group > div {
+    background-color: #ffc107; /* Fondo amarillo para las unidades */
+    border-radius: 10px;
+    padding: 10px 15px;
+    flex-grow: 1; 
+    max-width: 150px;
+    min-width: 80px;
+}
+
+.counter-unit {
+    font-size: 3em; 
+    font-weight: bold;
+    color: #333; 
+    font-family: 'Pacifico', cursive;
+    line-height: 1;
+    display: block;
+}
+
+.counter-label {
+    margin: 5px 0 0 0;
+    font-size: 0.8em;
+    font-weight: bold;
+    color: #E91E63; 
+}
+
+/* ------------------------------------------------------------------ */
+/* ESTILOS DE LA PANTALLA DE PREVIEW (#previewScreen) - PANTALLA 2 */
 /* ------------------------------------------------------------------ */
 
 #previewScreen {
@@ -25,7 +93,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #e3f2fd; 
+    background-color: #e3f2fd; /* Fondo azul claro */
     z-index: 1000;
     display: flex;
     justify-content: center;
@@ -59,12 +127,12 @@ body {
     min-height: 50px; 
 }
 
+/* ESTILOS DE LOS BOTONES CTA (Uniformidad y Centrado) */
 .cta-button {
     background-color: #ffc107;
     color: #333;
     border: none;
-    /* AJUSTE FINAL: Aumentamos padding horizontal a 30px */
-    padding: 15px 30px; /* <--- MÁS ESPACIO LATERAL */
+    padding: 15px 30px; /* Padding ajustado para texto largo */
     font-size: 1em;
     font-weight: bold;
     border-radius: 50px;
@@ -72,8 +140,7 @@ body {
     transition: background-color 0.3s ease;
     z-index: 100;
     
-    /* Mantenemos ancho fijo y centrado */
-    width: 180px; 
+    width: 180px; /* Ancho fijo para uniformidad */
     display: flex; 
     justify-content: center; 
     align-items: center; 
@@ -104,7 +171,7 @@ body {
 }
 
 /* ------------------------------------------------------------------ */
-/* ESTILOS DEL CONTENIDO PRINCIPAL (#mainContent) */
+/* ESTILOS DEL CONTENIDO PRINCIPAL (#mainContent) - PANTALLA 3 */
 /* ------------------------------------------------------------------ */
 
 #mainContent {
@@ -137,7 +204,8 @@ p {
     text-align: left;
 }
 
-#botonAudio {
+/* ESTILOS DEL BOTÓN PAUSA/PLAY */
+#playPauseButton {
     background-color: #8BC34A; /* Verde Lima Brillante */
     color: #ffffff;
     border: none;
@@ -149,10 +217,10 @@ p {
     transition: background-color 0.3s ease, transform 0.1s ease;
 }
 
-#botonAudio:hover {
+#playPauseButton:hover {
     background-color: #9CCC65; 
 }
 
-#botonAudio:active {
+#playPauseButton:active {
     transform: scale(0.98);
 }
