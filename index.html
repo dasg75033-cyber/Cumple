@@ -17,15 +17,27 @@
 
     <div id="loadingScreen">
         <div class="loading-box">
-            <h2 id="loadingTitle">¡PREPÁRATE!</h2>
+            <h2 id="loadingTitle">¡Faltan solo 00 días!</h2> 
             
             <div id="countdownTimer" class="timer-group">
                 <div>
-                    <span id="finalCountdown" class="counter-unit" style="font-size: 6em;">5</span>
+                    <span id="days" class="counter-unit">00</span>
+                    <p class="counter-label">DÍAS</p>
+                </div>
+                <div>
+                    <span id="hours" class="counter-unit">00</span>
+                    <p class="counter-label">HORAS</p>
+                </div>
+                <div>
+                    <span id="minutes" class="counter-unit">00</span>
+                    <p class="counter-label">MINUTOS</p>
+                </div>
+                <div>
+                    <span id="seconds" class="counter-unit">00</span>
+                    <p class="counter-label">SEGUNDOS</p>
                 </div>
             </div>
-            
-            <p id="countdownMessage" style="color: #E91E63; font-weight: bold;">La sorpresa se revelará en...</p>
+            <p id="countdownMessage" style="color: #E91E63; font-weight: bold;">30 de Diciembre de 2026</p>
         </div>
     </div>
 
@@ -59,7 +71,7 @@
             </p>
             
             <button id="playPauseButton">
-                ▶️ Presiona Aquí
+                ▶️ Presiona Aquí para la Música
             </button>
     
             <audio id="audioFondo">
@@ -72,4 +84,3 @@
     <script src="main.js"></script>
 </body>
 </html>
-
