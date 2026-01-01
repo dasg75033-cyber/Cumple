@@ -1,4 +1,4 @@
-// main.js - CÓDIGO FINAL Y SIMPLIFICADO CON CUENTA REGRESIVA FIJA DE 5 SEGUNDOS
+// main.js - CÓDIGO FINAL CON CONTADOR SINCRONIZADO AL 30 DE DICIEMBRE DE 2026
 
 // --- LÓGICA DEL CONFETI Y FUNCIONES DE INICIO ---
 
@@ -55,29 +55,72 @@ function esquivarBoton(event) {
 }
 
 
-// --- LÓGICA DE LA CUENTA REGRESIVA DE 5 SEGUNDOS (Función principal) ---
-function iniciarCuentaRegresiva() {
-    const loadingScreen = document.getElementById('loadingScreen');
-    const finalCountdownSpan = document.getElementById('finalCountdown');
+// --- LÓGICA DEL CONTADOR SINCRONIZADO A FECHA FIJA ---
+function iniciarContadorAFechaFija() {
     
-    if (!loadingScreen || !finalCountdownSpan) return;
+    // Establecemos la fecha objetivo: 30 de Diciembre de 2026 a medianoche
+    const TARGET_DATE = new Date('2026-12-30T00:00:00'); 
+    let intervalo; 
+    
+    const loadingScreen = document.getElementById('loadingScreen');
+    const daysSpan = document.getElementById('days'); 
+    const hoursSpan = document.getElementById('hours');
+    const minutesSpan = document.getElementById('minutes');
+    const secondsSpan = document.getElementById('seconds');
+    const countdownTitle = document.getElementById('loadingTitle');
+    const countdownMessage = document.getElementById('countdownMessage');
 
-    let contador = 5; // INICIAMOS EN 5 SEGUNDOS
-    finalCountdownSpan.textContent = contador;
 
-    const intervalo = setInterval(() => {
-        contador--;
-        if (contador > 0) {
-            finalCountdownSpan.textContent = contador;
-        } else {
+    if (!loadingScreen || !daysSpan || !hoursSpan || !minutesSpan || !secondsSpan) {
+        return; 
+    }
+
+    function actualizarContador() {
+        const ahora = new Date();
+        let diferenciaMs = TARGET_DATE.getTime() - ahora.getTime();
+        
+        // --- LÓGICA DE DESBLOQUEO ---
+        if (diferenciaMs <= 0) { 
+            // Si la fecha objetivo ya pasó, desactivamos el contador y mostramos la pantalla de bienvenida.
             clearInterval(intervalo);
-            
-            // Ocultar pantalla de carga y mostrar la pantalla de bienvenida
             loadingScreen.classList.add('hidden');
             const preview = document.getElementById('previewScreen');
             if (preview) preview.classList.remove('hidden');
+            return;
         }
-    }, 1000); 
+
+        // 3. Conversión de milisegundos a Días, Horas, Minutos, Segundos
+        const SEGUNDO = 1000;
+        const MINUTO = SEGUNDO * 60;
+        const HORA = MINUTO * 60;
+        const DIA = HORA * 24;
+        
+        const dias = Math.floor(diferenciaMs / DIA);
+        diferenciaMs -= dias * DIA;
+        
+        const horas = Math.floor(diferenciaMs / HORA);
+        diferenciaMs -= horas * HORA;
+        
+        const minutos = Math.floor(diferenciaMs / MINUTO);
+        diferenciaMs -= minutos * MINUTO;
+        
+        const segundos = Math.floor(diferenciaMs / SEGUNDO);
+
+        // 4. Formatear y mostrar 
+        daysSpan.textContent = dias.toString().padStart(2, '0');
+        hoursSpan.textContent = horas.toString().padStart(2, '0');
+        minutesSpan.textContent = minutos.toString().padStart(2, '0');
+        secondsSpan.textContent = segundos.toString().padStart(2, '0');
+        
+        // Actualizar el mensaje con el número de días
+        if (countdownTitle) {
+            countdownTitle.textContent = `¡Faltan solo ${dias} días!`;
+        }
+    }
+
+    // Actualizar el contador y luego cada segundo
+    actualizarContador();
+    intervalo = setInterval(actualizarContador, 1000);
 }
 
 
@@ -114,8 +157,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const noButton = document.getElementById('noButton');
     const playPauseButton = document.getElementById('playPauseButton');
 
-    // INICIA LA CUENTA REGRESIVA DE 5 SEGUNDOS APENAS CARGA LA PÁGINA
-    iniciarCuentaRegresiva();
+    // INICIA EL CONTADOR DE FECHA FIJA
+    iniciarContadorAFechaFija();
 
     // --- 1. LÓGICA DEL BOTÓN "SÍ" ---
     if(yesButton) yesButton.addEventListener('click', mostrarContenidoPrincipal);
